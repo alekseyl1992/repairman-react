@@ -1,0 +1,28 @@
+/* Base Application Styles */
+body {
+  background: #eee;
+}
+
+.b-container {
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.b-input {
+    position: relative;
+    float: left;
+    display: inline-block;
+}
+
+.b-button {
+    position: relative;
+    float: left;
+    display: inline-block;
+}
+
+.b-output {
+    position: relative;
+    float: right;
+    width: 30%;
+}

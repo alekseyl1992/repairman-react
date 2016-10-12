@@ -5,9 +5,16 @@ class Output extends React.Component {
   render() {
     const formFields = this.props.results.map(field => (
       <div className="form-group" key={field.key}>
-        <label htmlFor={'b-output-form__' + field.key} className="col-sm-6 control-label">{field.label}</label>
+        <label htmlFor={'b-output-form__' + field.key}
+               className="col-sm-6 control-label"
+               dangerouslySetInnerHTML={{__html: field.label}}></label>
         <div className="col-sm-6">
-          <output ref={field.key} type="number" className="form-control" id={'b-output-form__' + field.key} defaultValue={field.value} />
+          <input ref={field.key}
+                 type="number"
+                 className="form-control"
+                 id={'b-output-form__' + field.key}
+                 value={field.value}
+                 readOnly="true" />
         </div>
       </div>
     ));

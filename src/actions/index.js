@@ -11,8 +11,7 @@ export const recalculate = (params) => {
   const d = v => console.log(v, parser.get(v));
 
   const getMathValue = name => {
-    var val = parser.get(name);
-    return val ? val.toFixed(4) : '';
+    return parser.get(name).toFixed(4);
   }
 
   parser.set('N', params.pc_count);

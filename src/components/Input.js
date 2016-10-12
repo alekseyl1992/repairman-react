@@ -13,19 +13,23 @@ class Input extends React.Component {
     const formFields = [{
       key: 'pc_count',
       label: 'Количество компьютеров (N)',
-      value: 10
+      value: 15
     }, {
       key: 't_work',
       label: 'Время наработки на отказ (Tно)',
-      value: 10
+      value: 600
     }, {
       key: 't_repair',
       label: 'Время восстановления (То)',
-      value: 10
+      value: 8
     }, {
       key: 'repairmen_count',
       label: 'Количество ремонтников (C)',
-      value: 10
+      value: 2
+    }, {
+      key: 'decimal_places',
+      label: 'Число знаков после запятой (D)',
+      value: 4
     }].map(field => {
       return (
           <div className="form-group" key={field.key}>
@@ -38,11 +42,11 @@ class Input extends React.Component {
     });
 
     return (
-      <div className="b-input well">
-        <h2>Входные параметры:</h2>
+      <div className="b-input well text-center">
+        <h2>Входные параметры</h2>
         <form className="b-input__form form-horizontal">
           {formFields}
-          <button className="btn btn-primary" onClick={this.onButtonClick.bind(this)}>Вычислить</button>
+          <button className="btn btn-lg btn-primary" onClick={this.onButtonClick.bind(this)}>Вычислить</button>
         </form>
       </div>
     )

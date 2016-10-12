@@ -4,11 +4,11 @@ body {
   font-size: 2em;
 }
 
-.container-fluid {
-  /*margin: 30px;*/
+.form-control {
+  font-size: 1em;
 }
 
-.form-control {
+.btn {
   font-size: 1em;
 }
 

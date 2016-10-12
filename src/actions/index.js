@@ -11,7 +11,7 @@ export const recalculate = (params) => {
   const d = v => console.log(v, parser.get(v));
 
   const getMathValue = name => {
-    return parser.get(name).toFixed(4);
+    return parser.get(name).toFixed(params.decimal_places);
   }
 
   parser.set('N', params.pc_count);
@@ -21,13 +21,11 @@ export const recalculate = (params) => {
   parser.set('t_0', params.t_repair);
 
   parser.set('range_sum', (start, end, func) => {
-      // create a sum of values from start to end,
-      // with a function applied to each
-      var range = 0;
-      for (var i = start; i < end + 1; i++) {
-          range += func(i);
-      }
-      return range;
+    let sum = 0;
+    for (let i = start; i < end + 1; i++) {
+      sum += func(i);
+    }
+    return sum;
   });
 
   m('mu_no = 1/t_no');
@@ -99,47 +97,47 @@ export const recalculate = (params) => {
     type: RECALCULATE,
     data: [{
       key: 'P_0',
-      label: '- (P<sub>0</sub>)',
+      label: 'Вероятность состояния (P<sub>0</sub>)',
       value: getMathValue('P_0')
     }, {
       key: 'Q',
-      label: '- (Q)',
+      label: 'Заявок в очереди (Q)',
       value: getMathValue('Q')
     }, {
       key: 'L',
-      label: '- (L)',
+      label: 'Заявок в системе (L)',
       value: getMathValue('L')
     }, {
       key: 'U',
-      label: '- (U)',
+      label: 'Коэфициент использования (U)',
       value: getMathValue('U')
     }, {
       key: 'ro_0',
-      label: '- (ρ<sub>0</sub>)',
+      label: 'Загрузка ремонтника (ρ<sub>0</sub>)',
       value: getMathValue('ro_0')
     }, {
       key: 'n',
-      label: '- (n)',
+      label: 'Работающих компьютеров (n)',
       value: getMathValue('n')
     }, {
       key: 'ro_e',
-      label: '- (ρ<sub>e</sub>)',
+      label: 'Коэфициент готовности (ρ<sub>e</sub>)',
       value: getMathValue('ro_e')
     }, {
       key: 'W',
-      label: '- (W)',
+      label: 'Время ожидания (W)',
       value: getMathValue('W')
     }, {
       key: 'Tp',
-      label: '- (T<sub>р</sub>)',
+      label: 'Время ремонта (T<sub>р</sub>)',
       value: getMathValue('Tp')
     }, {
       key: 'Tc',
-      label: '- (T<sub>ц</sub>)',
+      label: 'Время цикла (T<sub>ц</sub>)',
       value: getMathValue('Tc')
     }, {
       key: 'load_koef',
-      label: '- (ρ<sub>e</sub> / ρ<sub>ц</sub>)',
+      label: 'Коэфициент загрузки (ρ<sub>e</sub> / ρ<sub>ц</sub>)',
       value: getMathValue('load_koef')
     }]
   }

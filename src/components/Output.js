@@ -20,8 +20,8 @@ class Output extends React.Component {
     ));
 
     return (
-      <div className="b-output well">
-        <h2>Результаты:</h2>
+      <div className="b-output well text-center">
+        <h2>Результаты</h2>
         <form className="b-output__form form-horizontal">
           {formFields}
         </form>

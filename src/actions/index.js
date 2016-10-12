@@ -1,4 +1,6 @@
 import math from 'mathjs';
+import config from 'config';
+import _ from 'lodash';
 
 export const RECALCULATE = 'RECALCULATE';
 
@@ -8,7 +10,10 @@ export const recalculate = (params) => {
   // create a shortcut for all math functions
   const m = parser.eval.bind(parser);
   const g = parser.get.bind(parser);
-  const d = v => console.log(v, parser.get(v));
+
+  let d = _.noop;
+  if (config.appEnv == 'dev')
+    d = v => console.log(v, parser.get(v));  // eslint-disable-line no-console
 
   const getMathValue = name => {
     return parser.get(name).toFixed(params.decimal_places);
@@ -19,6 +24,9 @@ export const recalculate = (params) => {
 
   parser.set('t_no', params.t_work);
   parser.set('t_0', params.t_repair);
+
+  parser.set('repairman_salary', params.repairman_salary);
+  parser.set('downtime_cost', params.downtime_cost);
 
   parser.set('range_sum', (start, end, func) => {
     let sum = 0;
@@ -93,6 +101,9 @@ export const recalculate = (params) => {
   m('load_koef = ro_e / ro_0');
   d('load_koef');
 
+  m('losses = C * repairman_salary + L * downtime_cost');
+  d('losses');
+
   return {
     type: RECALCULATE,
     data: [{
@@ -139,6 +150,10 @@ export const recalculate = (params) => {
       key: 'load_koef',
       label: 'Коэфициент загрузки (ρ<sub>e</sub> / ρ<sub>ц</sub>)',
       value: getMathValue('load_koef')
+    }, {
+      key: 'losses',
+      label: 'Убытки (Y)',
+      value: getMathValue('losses')
     }]
   }
 }

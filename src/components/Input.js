@@ -4,8 +4,19 @@ import _ from 'lodash';
 import { recalculate } from '../actions';
 
 class Input extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(recalculate(_.mapValues(this.refs, field => parseFloat(field.value))));
+  }
+
   onButtonClick(e) {
     e.preventDefault();
+
+    let decimal_places = parseInt(this.refs.decimal_places.value);
+    if (decimal_places < 0)
+      this.refs.decimal_places.value = 0;
+    else if (decimal_places > 20)
+      this.refs.decimal_places.value = 20;
+
     this.props.dispatch(recalculate(_.mapValues(this.refs, field => parseFloat(field.value))));
   }
 
@@ -16,16 +27,24 @@ class Input extends React.Component {
       value: 15
     }, {
       key: 't_work',
-      label: 'Время наработки на отказ (Tно)',
+      label: 'Время наработки на отказ (T<sub>но</sub>)',
       value: 600
     }, {
       key: 't_repair',
-      label: 'Время восстановления (То)',
+      label: 'Время восстановления (Т<sub>о</sub>)',
       value: 8
     }, {
       key: 'repairmen_count',
       label: 'Количество ремонтников (C)',
       value: 2
+    }, {
+      key: 'repairman_salary',
+      label: 'Заработная плата ремонтника (S<sub>1</sub>)',
+      value: 400
+    }, {
+      key: 'downtime_cost',
+      label: 'Стоимость простоя (S)',
+      value: 500
     }, {
       key: 'decimal_places',
       label: 'Число знаков после запятой (D)',
@@ -33,7 +52,9 @@ class Input extends React.Component {
     }].map(field => {
       return (
           <div className="form-group" key={field.key}>
-            <label htmlFor={'b-input-form__' + field.key} className="col-sm-6 control-label">{field.label}</label>
+            <label htmlFor={'b-input-form__' + field.key}
+                   className="col-sm-6 control-label"
+                   dangerouslySetInnerHTML={{__html: field.label}} />
             <div className="col-sm-6">
               <input ref={field.key} type="number" className="form-control" id={'b-input-form__' + field.key} defaultValue={field.value} />
             </div>

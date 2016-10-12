@@ -45,8 +45,8 @@ function getDefaultModules() {
         loader: 'style-loader!css-loader!stylus-loader'
       },
       {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
-        loader: 'url-loader?limit=8192'
+         test: /^(?!.*fonts)\/.*?\.(jpg|jpeg|gif|png|svg)$/,
+         loader: 'url-loader?limit=256&name=/img/[name].[ext]'
       },
       { test: /\.(woff|woff2)$/,  loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
       { test: /\.ttf$/,           loader: 'url-loader' },

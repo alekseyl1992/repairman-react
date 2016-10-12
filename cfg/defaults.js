@@ -47,7 +47,11 @@ function getDefaultModules() {
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
         loader: 'url-loader?limit=8192'
-      }
+      },
+      { test: /\.(woff|woff2)$/,  loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.ttf$/,           loader: 'url-loader' },
+      { test: /\.eot$/,           loader: 'url-loader' },
+      { test: /\.svg$/,           loader: 'url-loader' }
     ]
   };
 }

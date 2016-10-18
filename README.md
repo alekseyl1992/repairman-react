@@ -1,11 +1,2 @@
-# React redux tutorial
-
-Covered topics:
-- React
-- Redux
-- Async actions
-- Routing
-
-In the next commits:
-- Immutabillity
-- Animations
+# Repairman model (React)
+Repairman model for Queueing theory course in BMSTU
